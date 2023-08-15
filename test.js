@@ -28,3 +28,9 @@ describe('Step Two', () => {
     assert.equal(challengeCalculator([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]), 78);
   });
 });
+
+describe('Step Three', () => {
+  it('accepts newline character as a delimiter', () => {
+    assert.equal(challengeCalculator('1\n2,3', true), 6);
+  });
+});

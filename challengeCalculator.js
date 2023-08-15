@@ -2,6 +2,8 @@ challengeCalculator = (values) => {
 
   // if input is a string, convert it to an array
   if (typeof values == "string") {
+    // takes a new line character and converts it into a comma
+    values = values.replaceAll(/(\r\n|\r|\n)/g, ',');
     values = values.split(",")
   }
 
