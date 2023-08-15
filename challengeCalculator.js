@@ -13,6 +13,8 @@ challengeCalculator = (values) => {
   let negativeValues = []
   // go through each item in the parameters
   for (i = 0; i < values.length; i++) {
+
+    // convert string to number
     // if char is empty
     if (values[i].length == 0) {
       values[i] = 0;
@@ -30,6 +32,11 @@ challengeCalculator = (values) => {
     if (values[i] < 0) {
       negativeValues.push(values[i])
       continue
+    }
+
+    // check if number is greater than 1000, if so set it to 0 it
+    if (values[i] > 1000) {
+      values[i] = 0
     }
 
     // if it is the first item, set runningTotal equal to it

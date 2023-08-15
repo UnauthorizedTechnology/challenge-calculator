@@ -13,7 +13,7 @@ describe('Step One', () => {
     assert.equal(challengeCalculator("20"), 20);
   });
   it('accepts two values as an input', () => {
-    assert.equal(challengeCalculator("1, 5000"), 5001);
+    assert.equal(challengeCalculator("1, 5000"), 1);
   });
   // deprecated 
   it.skip('accepts negative values as an input', () => {
@@ -41,5 +41,11 @@ describe('Step Four', () => {
     assert.throws(() => {
       challengeCalculator("1, 2, -3"), new Error(`Negative numbers were included in the input and they are not allowed. Negative numbers provided: -3`)
     })
+  });
+});
+
+describe('Step Five', () => {
+  it('denys numbers over 1000 and skips them', () => {
+    assert.equal(challengeCalculator([2, 1001, 6]), 8);
   });
 });
