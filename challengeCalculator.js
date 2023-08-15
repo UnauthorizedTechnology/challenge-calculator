@@ -1,4 +1,4 @@
-challengeCalculator = (values, alternateDelimiter = "", allowNegative = false, upperBound = 1000) => {
+challengeCalculator = (values, operation = "+", alternateDelimiter = "", allowNegative = false, upperBound = 1000) => {
 
   // if input is a string, convert it to an array
   if (typeof values == "string") {
@@ -91,9 +91,23 @@ challengeCalculator = (values, alternateDelimiter = "", allowNegative = false, u
     if (i == 0) {
       runningTotal = values[i]
     }
-    // else, add it
+    // else, add perform the requested operation on it
     else {
-      runningTotal += values[i]
+      if (operation == "+") {
+        runningTotal += values[i]
+      }
+      else if (operation == "-") {
+        runningTotal -= values[i]
+      }
+      else if (operation == "*") {
+        runningTotal *= values[i]
+      }
+      else if (operation == "/") {
+        runningTotal /= values[i]
+      }
+      else {
+        throw new Error(`Only "+", "-", "*", and "/" are accepted operators. You provided: ${operation}`)
+      }
     }
     runningTotalArray.push(values[i])
   };
@@ -103,10 +117,10 @@ challengeCalculator = (values, alternateDelimiter = "", allowNegative = false, u
     throw new Error(`Negative numbers were included in the input and they are not allowed. Negative numbers provided: ${negativeValues}`)
   }
 
-  return (runningTotal, PrintFormula(runningTotalArray, runningTotal))
+  return (runningTotal, PrintFormula(runningTotalArray, runningTotal, operation))
 };
 
-PrintFormula = (runningTotalArray, runningTotal) => {
+PrintFormula = (runningTotalArray, runningTotal, operation = "+") => {
 
   let formula = ""
   for (item = 0; item < runningTotalArray.length; item++) {
@@ -116,7 +130,7 @@ PrintFormula = (runningTotalArray, runningTotal) => {
       formula += ` = ${runningTotal}`
     }
     else {
-      formula += "+"
+      formula += `${operation}`
 
     }
   }

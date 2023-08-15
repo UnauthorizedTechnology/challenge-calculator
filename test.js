@@ -15,9 +15,9 @@ describe('Step One', () => {
   it('accepts two values as an input', () => {
     assert.equal(challengeCalculator("1, 5000"), (1, "1+0 = 1"));
   });
-  // deprecated 
-  it.skip('accepts negative values as an input', () => {
-    assert.equal(challengeCalculator("4, -3"), 1);
+
+  it('accepts negative values as an input', () => {
+    assert.equal(challengeCalculator("4, -3", "+", "", true), (1, "4+-3 = 1"));
   });
   it('accepts NaN as an input', () => {
     assert.equal(challengeCalculator("5, tytyt"), (5, "5+0 = 5"));
@@ -83,13 +83,30 @@ describe('Stretch One', () => {
 
 describe('Stretch Three', () => {
   it('allows an alternate delimiter in step #3', () => {
-    assert.equal(challengeCalculator("1*2, 3", "*"), (6, "1+2+3 = 6"));
+    assert.equal(challengeCalculator("1*2, 3", "+", "*"), (6, "1+2+3 = 6"));
   });
   it('toggle whether to deny negative numbers in step #4', () => {
-    assert.equal(challengeCalculator("1, 2, -3", "", true), (0, "1+2+-3 = 0"));
+    assert.equal(challengeCalculator("1, 2, -3", "+", "", true), (0, "1+2+-3 = 0"));
   });
   it('Sets an upper bound in step #5', () => {
-    assert.equal(challengeCalculator("1, 2, 2000", "", "", 2001), (2003, "1+2+2000 = 2003"));
+    assert.equal(challengeCalculator("1, 2, 2000", "+", "", "", 2001), (2003, "1+2+2000 = 2003"));
     assert.equal(challengeCalculator("1, 2, 2001"), (3, "1+2+0 = 3"));
+  });
+});
+
+describe('Stretch Five', () => {
+  it('supports subtraction operations', () => {
+    assert.equal(challengeCalculator("1, 2, 3, 4", "-"), (-8, "1-2-3-4 = -8"));
+  });
+  it('supports multiplication operations', () => {
+    assert.equal(challengeCalculator("1, 2, 3, 4", "*"), (24, "1*2*3*4 = 24"));
+  });
+  it('supports division operations', () => {
+    assert.equal(challengeCalculator("1, 2, 3, 4", "/"), ((1 / 2 / 3 / 4), `1/2/3/4 = ${1 / 2 / 3 / 4}`));
+  });
+  it('Throws an error when an unknown operator is given ', () => {
+    assert.throws(() => {
+      challengeCalculator("1, 2, 3, 4", "?"), new Error(`Only "+", "-", "*", and "/" are accepted operators. You provided: ?`)
+    })
   });
 });
