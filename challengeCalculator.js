@@ -9,7 +9,16 @@ challengeCalculator = (values) => {
       let delimiter
       // remove // from start of string
       values = values.substring(2)
-      delimiter = values[0]
+
+      // check if multi char delimiter
+      if (values[0] == "[") {
+        delimiter = values.substr(1, values.indexOf("]") - 1)
+        values = values.substring(delimiter.length + 3)
+      }
+      // else single char delimiter
+      else {
+        delimiter = values[0]
+      }
 
       // takes the custom delimiter and converts it to a comma
       values = values.replaceAll(delimiter, ",")
