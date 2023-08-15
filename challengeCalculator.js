@@ -6,22 +6,42 @@ challengeCalculator = (values) => {
     // check if there is a custom delimiter 
 
     if (values.slice(0, 2) == "//") {
-      let delimiter
+      let delimitersArray = []
       // remove // from start of string
       values = values.substring(2)
 
-      // check if multi char delimiter
-      if (values[0] == "[") {
-        delimiter = values.substr(1, values.indexOf("]") - 1)
-        values = values.substring(delimiter.length + 3)
-      }
-      // else single char delimiter
-      else {
-        delimiter = values[0]
+      // set temp single delimiter string
+      let delimiter = ""
+      // set var to just the delimiters part of the input
+      let delimitersString = values.substr(0, values.indexOf("\n"))
+      values = values.substring(delimitersString.length + 1)
+
+      // read each char in just the delimiters
+      for (i = 0; i < delimitersString.length; i++) {
+
+        // if it is the start of a new delimiter, continue
+        if (delimitersString[i] == "[") {
+          continue
+        }
+        // if it is the end of a delimiter, push it to the array and reset the temp variable
+        else if (delimitersString[i] == "]") {
+          delimitersArray.push(delimiter)
+          delimiter = ""
+        }
+        // if it is the last item and not a "]", meaning it is a single char 
+        else if (i == delimitersString.length - 1) {
+          delimitersArray.push(delimitersString[i])
+        }
+        // if it is apart of a delimiter, push its char to the temp string
+        else {
+          delimiter += delimitersString[i]
+        }
       }
 
-      // takes the custom delimiter and converts it to a comma
-      values = values.replaceAll(delimiter, ",")
+      // replace custom delimiter with comma
+      for (i = 0; i < delimitersArray.length; i++) {
+        values = values.replaceAll(delimitersArray[i], ",");
+      }
     }
 
     // takes a new line character and converts it into a comma

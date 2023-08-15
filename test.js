@@ -62,3 +62,9 @@ describe('Step Seven', () => {
     assert.equal(challengeCalculator("//[***]\n11***22***33"), 66);
   });
 });
+
+describe('Step Eight', () => {
+  it('supports 1 custom delimiter of any length', () => {
+    assert.equal(challengeCalculator("//[*][!!][r9r]\n11r9r22*hh*33!!44"), 110);
+  });
+});
