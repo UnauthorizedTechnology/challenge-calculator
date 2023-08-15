@@ -4,10 +4,6 @@ challengeCalculator = (values) => {
   if (typeof values == "string") {
     values = values.split(",")
   }
-  // check if more than two values are provided
-  if (values.length > 2) {
-    throw new Error('Parameter has more than two values');
-  }
 
   // set temporary var for total
   let runningTotal = 0
