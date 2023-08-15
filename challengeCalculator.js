@@ -51,6 +51,7 @@ challengeCalculator = (values) => {
 
   // set temporary var for total
   let runningTotal = 0
+  let runningTotalArray = []
   // initalize an empty array to hold the possible negative numbers
   let negativeValues = []
   // go through each item in the parameters
@@ -89,6 +90,7 @@ challengeCalculator = (values) => {
     else {
       runningTotal += values[i]
     }
+    runningTotalArray.push(values[i])
   };
 
   // throw exception if the input contained negative numbers
@@ -96,7 +98,24 @@ challengeCalculator = (values) => {
     throw new Error(`Negative numbers were included in the input and they are not allowed. Negative numbers provided: ${negativeValues}`)
   }
 
-  return runningTotal
+  return (runningTotal, PrintFormula(runningTotalArray, runningTotal))
 };
 
-module.exports = { challengeCalculator }
+PrintFormula = (runningTotalArray, runningTotal) => {
+
+  let formula = ""
+  for (item = 0; item < runningTotalArray.length; item++) {
+    formula += runningTotalArray[item]
+
+    if (item == runningTotalArray.length - 1) {
+      formula += ` = ${runningTotal}`
+    }
+    else {
+      formula += "+"
+
+    }
+  }
+  return formula
+}
+
+module.exports = { challengeCalculator, PrintFormula }
