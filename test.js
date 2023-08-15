@@ -49,3 +49,10 @@ describe('Step Five', () => {
     assert.equal(challengeCalculator([2, 1001, 6]), 8);
   });
 });
+
+describe('Step Six', () => {
+  it('supports 1 custom delimiter of a single character', () => {
+    assert.equal(challengeCalculator("//#\n2#5"), 7);
+    assert.equal(challengeCalculator("//,\n2,ff,100"), 102);
+  });
+});

@@ -2,6 +2,19 @@ challengeCalculator = (values) => {
 
   // if input is a string, convert it to an array
   if (typeof values == "string") {
+
+    // check if there is a custom delimiter 
+
+    if (values.slice(0, 2) == "//") {
+      let delimiter
+      // remove // from start of string
+      values = values.substring(2)
+      delimiter = values[0]
+
+      // takes the custom delimiter and converts it to a comma
+      values = values.replaceAll(delimiter, ",")
+    }
+
     // takes a new line character and converts it into a comma
     values = values.replaceAll(/(\r\n|\r|\n)/g, ',');
     values = values.split(",")
@@ -34,7 +47,7 @@ challengeCalculator = (values) => {
       continue
     }
 
-    // check if number is greater than 1000, if so set it to 0 it
+    // check if number is greater than 1000, if so set it to 0
     if (values[i] > 1000) {
       values[i] = 0
     }
