@@ -1,4 +1,4 @@
-challengeCalculator = (values) => {
+challengeCalculator = (values, alternateDelimiter = "", allowNegative = false, upperBound = 1000) => {
 
   // if input is a string, convert it to an array
   if (typeof values == "string") {
@@ -44,8 +44,13 @@ challengeCalculator = (values) => {
       }
     }
 
-    // takes a new line character and converts it into a comma
-    values = values.replaceAll(/(\r\n|\r|\n)/g, ',');
+    if (alternateDelimiter) {
+      values = values.replaceAll(alternateDelimiter, ',');
+    } else {
+      // takes a new line character and converts it into a comma
+      values = values.replaceAll(/(\r\n|\r|\n)/g, ',');
+    }
+
     values = values.split(",")
   }
 
@@ -72,13 +77,13 @@ challengeCalculator = (values) => {
     }
 
     // check if value is negative, add to exeption list and skip over the rest of the loop
-    if (values[i] < 0) {
+    if (values[i] < 0 && !allowNegative) {
       negativeValues.push(values[i])
       continue
     }
 
     // check if number is greater than 1000, if so set it to 0
-    if (values[i] > 1000) {
+    if (values[i] > upperBound) {
       values[i] = 0
     }
 

@@ -80,3 +80,16 @@ describe('Stretch One', () => {
     assert.equal(challengeCalculator("//#\n,2#5"), (7, "0+2+5 = 7"));
   });
 });
+
+describe('Stretch Three', () => {
+  it('allows an alternate delimiter in step #3', () => {
+    assert.equal(challengeCalculator("1*2, 3", "*"), (6, "1+2+3 = 6"));
+  });
+  it('toggle whether to deny negative numbers in step #4', () => {
+    assert.equal(challengeCalculator("1, 2, -3", "", true), (0, "1+2+-3 = 0"));
+  });
+  it('Sets an upper bound in step #5', () => {
+    assert.equal(challengeCalculator("1, 2, 2000", "", "", 2001), (2003, "1+2+2000 = 2003"));
+    assert.equal(challengeCalculator("1, 2, 2001"), (3, "1+2+0 = 3"));
+  });
+});
