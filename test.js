@@ -15,7 +15,8 @@ describe('Step One', () => {
   it('accepts two values as an input', () => {
     assert.equal(challengeCalculator("1, 5000"), 5001);
   });
-  it('accepts negative values as an input', () => {
+  // deprecated 
+  it.skip('accepts negative values as an input', () => {
     assert.equal(challengeCalculator("4, -3"), 1);
   });
   it('accepts NaN as an input', () => {
@@ -32,5 +33,13 @@ describe('Step Two', () => {
 describe('Step Three', () => {
   it('accepts newline character as a delimiter', () => {
     assert.equal(challengeCalculator('1\n2,3', true), 6);
+  });
+});
+
+describe('Step Four', () => {
+  it('denys negative numbers and throws an exception with all the negative numbers provided', () => {
+    assert.throws(() => {
+      challengeCalculator("1, 2, -3"), new Error(`Negative numbers were included in the input and they are not allowed. Negative numbers provided: -3`)
+    })
   });
 });
